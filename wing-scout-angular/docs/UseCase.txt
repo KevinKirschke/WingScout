@@ -1,0 +1,47 @@
+
+Das Diagramm wird folgende Haupt-Use-Cases enthalten:
+
+
+Schiffe durchsuchen (Filter, Kategorien, Suche)
+Schiffe im Detail anzeigen
+Schiffe favorisieren (Favoritenliste)
+Schiffe in den Warenkorb legen
+Warenkorb verwalten (Entfernen, Checkout, Preisberechnung)
+Bestellung abschließen (Zahlung & PDF-Rechnung)
+
+
+Es zeigt alle relevanten Interaktionen eines Nutzers mit der Anwendung.
+
+
+Akteur:
+
+👤 Benutzer (kann alle Use-Cases ausführen)
+
+Haupt-Use-Cases:
+
+Schiffe durchsuchen
+
+Kategorien anzeigen
+Filter anwenden
+Suche nutzen
+Schiffe im Detail anzeigen
+
+Schiffsdetails öffnen
+Schiffe favorisieren
+
+Schiff als Favorit markieren
+Favoritenliste verwalten
+Schiffe in den Warenkorb legen
+
+Stückzahl auswählen
+Warenkorb verwalten
+Warenkorb verwalten
+
+Schiffe aus dem Warenkorb entfernen
+Warenkorb leeren
+Gesamtpreis berechnen
+Bestellung abschließen
+
+Checkout starten
+Rechnung als PDF exportieren
+Zahlung abschließen

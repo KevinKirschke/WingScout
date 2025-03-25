@@ -1,0 +1,376 @@
+<!-- app.component.html -->
+
+<!--
+
+
+Aufgabe für Schüler: Aufteilung der Angular-App in logische Komponenten
+
+Ziel der Aufgabe:
+
+Die Schüler sollen die bestehende Angular-App (app.component.html) in logische
+Komponenten aufteilen. Dabei sollen sie die Dateien
+
+app.component.ts, app.component.html und app.component.css
+
+erstellen und den Code sinnvoll strukturieren. Zusätzlich sollen sie darauf achten,
+dass die Imports korrekt übertragen werden.
+
+Schritt-für-Schritt-Anleitung:
+
+1. Vorbereitung
+Erstelle einen neuen Ordner für die Angular-App (falls noch nicht vorhanden).
+
+Erstelle die folgenden Dateien manuell:
+
+ordner components
+- header
+- main
+- footer
+- modale
+
+
+app.xy.ts
+
+app.xy.html
+
+app.x.css
+
+files für die jeweiligen components.
+
+Kopiere den gegebenen Code in die entsprechenden Dateien.
+
+2. Aufteilung des Codes
+
+Der Code ist in folgende logische Gruppen unterteilt:
+
+1.
+Header/Navbar:
+
+Enthält das Logo, den App-Titel und das Menü.
+
+2.
+Hauptinhalt:
+
+Enthält die Kategorien-Cards, die Raumschiff-Liste und die Filter-Buttons.
+
+3.
+Footer:
+
+Enthält Links zum Impressum und Datenschutz sowie das Copyright.
+
+4.
+Modale:
+
+Enthält die Modale für Raumschiffdetails, Stückzahlauswahl, Favoritenliste, Filter, Warenkorb und Kasse.
+
+
+
+hier rendern wir den ganzen return.
+die ausgabe die der user am ende auf der webseite sieht.
+
+es ist ein klassischer aufbau mit header ,
+dann der main content, und der footer mit den üblichen verdächtigen.
+
+zum schluss kommen die modale und cards der einzelnen komponenten.
+die kommentare machen nochmal deutlich was was ist..
+erklärt sich eigentlich von selbst. einfaches html , liest sich wie nen buch.
+
+-->
+
+
+<div class="App">
+
+
+    <!-- 
+     
+    und hier kommt unser Header / Navbar mit Menü !!!
+    
+    -->
+
+  <!-- Header -->
+  <header class="App-header" (click)="closeMenu($event)">
+    <div class="header-content">
+      <img src="/assets/mylogo.png" alt="wingscout Logo" class="App-logo" (click)="scrollToTop()" />
+      <div class="app-title" (click)="scrollToTop()">Willkommen bei WingScout24.de</div>
+  
+      <!-- Menü-Icon -->
+      <div class="menu-container" (click)="toggleMenu()">
+        <div class="menu-icon">Menü ☰</div>
+      </div>
+    </div>
+
+    <!-- Menü Dropdown -->
+    <div *ngIf="isMenuOpen" class="menu">
+      <ul>
+        <li (click)="openModal('filter')">Suche</li>
+        <li (click)="openModal('favorites')">Meine Favoriten</li>
+        <li (click)="openModal('cart')">Zum Warenkorb</li>
+      </ul>
+    </div>
+  </header>
+
+
+    <!-- 
+     
+    und hier kommt unser Hauptkontent !!!
+    
+    -->
+
+  
+  <!-- Toastmessage/Notify für User Feedback -->
+  <div *ngIf="feedback" class="feedback">{{ feedback }}</div>
+
+
+  <!-- Hauptinhalt -->
+  <main class="App-main">
+    <div class="titel-content">
+      <h3>Ord Matell's größter Gebrauchtraumschiffmarkt!</h3>
+      <br />
+      <h3>Egal ob kleiner wendiger Fighter, oder schlagkräftige Invasionsflotte!</h3>
+      <br />
+      <h3>Bei uns finden Sie alles, was Sie für Ihre Rebellion brauchen!</h3>
+      <br />
+      <h3>⬇️ Stöbern Sie gerne in unseren Kategorien ⬇️</h3>
+    </div>
+  
+
+    <!-- Kategorien Cards -->
+    <div class="category-cards">
+      <div
+        *ngFor="let category of shipCategories"
+        class="category-card"
+        (click)="handleCategoryClick(category.id)"
+      >
+        <img [src]="category.image" [alt]="category.title" />
+        <h3>{{ category.title }}</h3>
+        <p>{{ category.description }}</p>
+      </div>
+    </div>
+  
+
+    <!-- Button Beschreibung -->
+    <div class="button-discription">
+      <p>⬇️ Klicke hier, um alle Filter zu entfernen! ⬇️</p>
+      <button class="load-more" (click)="resetFilters()">Alle anzeigen</button>
+      <p>⬇️ Hier sind unsere Angebote für Sie! ⬇️</p>
+  
+      <div *ngIf="activeCategory" class="active-category">
+        <h3>Aktive Kategorie: {{ getCategoryTitle(activeCategory) }}</h3>
+      </div>
+  
+      <div *ngIf="activeFilters.length > 0" class="active-filters">
+        <h3>Aktive Filter:</h3>
+        <ul>
+          <li *ngFor="let filter of activeFilters">{{ filter }}</li>
+        </ul>
+      </div>
+    </div>
+
+
+    <!-- Raumschiff Liste -->
+    <div id="starship-list" class="starship-list">
+      <div
+        *ngFor="let ship of filteredStarships"
+        class="starship-card"
+        (click)="openShipDetails(ship)"
+      >
+        <img [src]="ship.imageUrl" [alt]="ship.name" />
+        <h3>{{ ship.name }}</h3>
+        <p>{{ formatPrice(ship.costInCredits) }} Credits</p>
+      </div>
+    </div>
+  </main>
+
+
+    <!-- 
+     
+    und hier kommt unser Footer mit Impressum usw..  !!!
+    
+    -->
+
+  <!-- Footer -->
+  <footer class="App-footer">
+    <div class="impressum">
+      <a href="#impressum" class="text-white hover:underline mr-4">Impressum</a>
+    </div>
+
+    <div class="datenschutz">
+      <a href="#datenschutz" class="text-white hover:underline">Datenschutz</a>
+    </div>
+
+    <div class="foot" (click)="scrollToTop()">
+      <p>&copy; 2025 WingScout24 Inc. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!--
+  
+  hier ist der hauptkontent schon vorbei und jetzt kommen die ganzen modale.
+
+  die anschliessenden modale werden wir nach und in einzelne app.xyz.ts und app.xyz.html files
+  zerlegen. aber!  
+
+  liegt als "style.css" unter src neben app auf einer ebene. 
+
+  mehr passiert auch in der app nicht.. ist fertig.
+
+  hier die übeltäter:
+  
+  -->
+
+  <!-- Modals -->
+
+
+  <!-- Raumschiff-Modal -->
+  <div *ngIf="selectedShip" class="modal-z" (click)="closeModal($event)">
+    <div class="modal-content-ship">
+      <button class="close" (click)="selectedShip = null">✖</button>
+      <h2>{{ selectedShip.name }}</h2>
+      <img [src]="selectedShip.imageUrl" [alt]="selectedShip.name" class="modal-image" />
+      <p>Hersteller: {{ selectedShip.manufacturer }}</p>
+      <p>Klasse: {{ selectedShip.starshipClass }}</p>
+      <p>Kosten: {{ formatPrice(selectedShip.costInCredits) }} Credits</p>
+      <div class="modal-buttons">
+        <button (click)="handleAddToFavorites(selectedShip)">
+          {{ isFavorite(selectedShip.id) ? '★ Favorit entfernen' : '★ Favorisieren' }}
+        </button>
+        <button (click)="isInCart(selectedShip.id) ? removeFromCart(selectedShip.id) : handleAddToCart(selectedShip)">
+          {{ isInCart(selectedShip.id) ? '🛒 Aus dem Warenkorb entfernen' : '🛒 In den Warenkorb' }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Stückzahl-Modal -->
+  <div *ngIf="showQuantityModal" class="modal-z" (click)="closeModal($event)">
+    <div class="modal-content">
+      <button class="close" (click)="showQuantityModal = false">✖</button>
+      <h2>Stückzahl auswählen</h2>
+      <div class="quantity-selector">
+        <button (click)="decrementQuantity()">-</button>
+        <input class="in" type="number" [(ngModel)]="quantity" min="1" />
+        <button (click)="incrementQuantity()">+</button>
+      </div>
+      <div class="modal-buttons">
+        <button (click)="showQuantityModal = false">Abbrechen</button>
+        <button (click)="addToCartWithQuantity()">Hinzufügen</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Favoritenliste-Modal -->
+  <div *ngIf="showFavorites" class="modal" (click)="closeModal($event)">
+    <div class="modal-content">
+      <button class="close" (click)="showFavorites = false">✖</button>
+      <h2>Favoriten</h2>
+      <div *ngIf="favorites.length === 0; else favoriteList">
+        <p>Keine Favoriten</p>
+      </div>
+      <ng-template #favoriteList>
+        <div *ngFor="let ship of favorites" class="fav-cart-item" (click)="openShipDetailsFromFavorites(ship)">
+          <p>{{ ship.name }}</p>
+          <button (click)="removeFromFavorites(ship.id)">🗑️ Entfernen</button>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+
+
+  <!-- Suchen-Modal -->
+  <div *ngIf="showFilterModal" class="modal" (click)="closeModal($event)">
+    <div class="modal-content">
+      <button class="close" (click)="showFilterModal = false">✖</button>
+      <h2>Filter</h2>
+      <form>
+        <label>
+          Name:
+          <input type="text" name="name" [(ngModel)]="filters.name" />
+        </label>
+        <label>
+          Modell:
+          <select name="model" [(ngModel)]="filters.model">
+            <option value="">Alle</option>
+            <option *ngFor="let model of uniqueModels" [value]="model">{{ model }}</option>
+          </select>
+        </label>
+        <label>
+          Hersteller:
+          <select name="manufacturer" [(ngModel)]="filters.manufacturer">
+            <option value="">Alle</option>
+            <option *ngFor="let manufacturer of uniqueManufacturers" [value]="manufacturer">{{ manufacturer }}</option>
+          </select>
+        </label>
+        <label>
+          Min. Preis:
+          <input type="number" name="minPrice" [(ngModel)]="filters.minPrice" />
+        </label>
+        <label>
+          Max. Preis:
+          <input type="number" name="maxPrice" [(ngModel)]="filters.maxPrice" />
+        </label>
+      </form>
+      <div class="modal-buttons">
+        <button (click)="showFilterModal = false">Zurück</button>
+        <button (click)="resetFilters()">Zurücksetzen</button>
+        <button (click)="handleFilterApply()">OK</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Warenkorb-Modal -->
+  <div *ngIf="showCart" class="modal" (click)="closeModal($event)">
+    <div class="modal-content">
+      <button class="close" (click)="showCart = false">✖</button>
+      <h2>Warenkorb</h2>
+      <div *ngIf="cart.length === 0; else cartList">
+        <p>Warenkorb ist leer</p>
+      </div>
+      <ng-template #cartList>
+        <div *ngFor="let ship of cart" class="fav-cart-item" (click)="openShipDetailsFromCart(ship)">
+          <p>{{ ship.name }} - {{ ship.quantity }} Stk - {{ formatPrice(ship.costInCredits * ship.quantity) }} Credits</p>
+          <button (click)="removeFromCart(ship.id)">🗑️ Entfernen</button>
+        </div>
+        <div class="cart-total">
+          <div style="margin-top: 25px;"></div>
+          <p>Zu zahlender Gesamtpreis: {{ formatPrice(calculateTotalPrice()) }} Credits</p>
+        </div>
+        <div class="modal-buttons">
+          <button (click)="handleClearCart()">Warenkorb leeren</button>
+          <button (click)="handleCheckout()">Zur Kasse</button>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+
+
+  <!-- Kasse-Modal -->
+  <div *ngIf="showCheckoutModal" class="modal" (click)="closeModal($event)">
+    <div class="modal-content">
+      <button class="close" (click)="showCheckoutModal = false">✖</button>
+      <h2>Kasse</h2>
+      <div *ngIf="cart.length === 0; else checkoutList">
+        <p>Warenkorb ist leer</p>
+      </div>
+      <ng-template #checkoutList>
+        <div *ngFor="let ship of cart; let i = index" class="fav-cart-item">
+          <p>{{ ship.name }} - {{ ship.quantity }} Stk - {{ formatPrice(ship.costInCredits * ship.quantity) }} Credits</p>
+          <div class="quantity-selector">
+            <button (click)="updateCartQuantity(i, 'decrement')">-</button>
+            <input class="in" type="number" [(ngModel)]="ship.quantity" min="1" />
+            <button (click)="updateCartQuantity(i, 'increment')">+</button>
+          </div>
+        </div>
+        <div class="cart-total">
+          <p>Zu zahlender Gesamtpreis: {{ formatPrice(calculateTotalPrice()) }} Credits</p>
+        </div>
+        <div class="modal-buttons">
+          <button (click)="handleExportToPDF()">Rechnung als PDF</button>
+          <button (click)="handlePayNow()">Jetzt Bezahlen</button>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+  

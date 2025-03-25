@@ -1,0 +1,318 @@
+Aufgabe für Schüler: Aufteilung der Angular-App in logische Komponenten
+Ziel der Aufgabe:
+Die Schüler sollen die bestehende Angular-App (app.component.html) in logische Komponenten aufteilen. Dabei sollen sie die Dateien app.component.ts, app.component.html und app.component.css erstellen und den Code sinnvoll strukturieren. Zusätzlich sollen sie darauf achten, dass die Imports korrekt übertragen werden.
+
+Schritt-für-Schritt-Anleitung:
+1. Vorbereitung
+Erstelle einen neuen Ordner für die Angular-App (falls noch nicht vorhanden).
+
+Erstelle die folgenden Dateien manuell:
+
+ordner components
+- header
+- main
+- footer
+- modale
+
+
+app.xy.ts
+
+app.xy.html
+
+app.x.css
+
+files für die jeweiligen components.
+
+Kopiere den gegebenen Code in die entsprechenden Dateien.
+
+2. Aufteilung des Codes
+Der Code ist in folgende logische Gruppen unterteilt:
+
+Header/Navbar:
+
+Enthält das Logo, den App-Titel und das Menü.
+
+Hauptinhalt:
+
+Enthält die Kategorien-Cards, die Raumschiff-Liste und die Filter-Buttons.
+
+Footer:
+
+Enthält Links zum Impressum und Datenschutz sowie das Copyright.
+
+Modale:
+
+Enthält die Modale für Raumschiffdetails, Stückzahlauswahl, Favoritenliste, Filter, Warenkorb und Kasse.
+
+3. Aufgabenstellung
+Teil 1: Strukturierung der Dateien
+app.component.html:
+
+Behalte die Struktur der HTML-Datei bei, aber teile sie in logische Abschnitte auf:
+
+Header
+
+Hauptinhalt
+
+Footer
+
+Modale
+
+app.component.ts:
+
+Behalte die Zustandsvariablen und Methoden in dieser Datei.
+
+Verweise auf die externen HTML- und CSS-Dateien:
+
+typescript
+Copy
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [CommonModule, FormsModule],
+  templateUrl: './app.component.html', // Verweis auf die externe HTML-Datei
+  styleUrls: ['./app.component.css'], // Verweis auf die externe CSS-Datei
+})
+app.component.css:
+
+Füge CSS-Stile für die App hinzu.
+
+Beispiel:
+
+css
+Copy
+h1 {
+  color: blue;
+}
+Teil 2: Logische Aufteilung
+Header/Navbar:
+
+Identifiziere den Header-Bereich und behalte ihn in der app.component.html-Datei.
+
+Beispiel:
+
+html
+Copy
+<header class="App-header" (click)="closeMenu($event)">
+  <div class="header-content">
+    <img src="/assets/mylogo.png" alt="wingscout Logo" class="App-logo" (click)="scrollToTop()" />
+    <div class="app-title" (click)="scrollToTop()">Willkommen bei WingScout24.de</div>
+    <div class="menu-container" (click)="toggleMenu()">
+      <div class="menu-icon">Menü ☰</div>
+    </div>
+  </div>
+  <div *ngIf="isMenuOpen" class="menu">
+    <ul>
+      <li (click)="openModal('filter')">Suche</li>
+      <li (click)="openModal('favorites')">Meine Favoriten</li>
+      <li (click)="openModal('cart')">Zum Warenkorb</li>
+    </ul>
+  </div>
+</header>
+Run HTML
+Hauptinhalt:
+
+Identifiziere den Hauptinhalt und behalte ihn in der app.component.html-Datei.
+
+Beispiel:
+
+html
+Copy
+<main class="App-main">
+  <div class="titel-content">
+    <h3>Ord Matell's größter Gebrauchtraumschiffmarkt!</h3>
+    <h3>Egal ob kleiner wendiger Fighter, oder schlagkräftige Invasionsflotte!</h3>
+    <h3>Bei uns finden Sie alles, was Sie für Ihre Rebellion brauchen!</h3>
+    <h3>⬇️ Stöbern Sie gerne in unseren Kategorien ⬇️</h3>
+  </div>
+  <div class="category-cards">
+    <div *ngFor="let category of shipCategories" class="category-card" (click)="handleCategoryClick(category.id)">
+      <img [src]="category.image" [alt]="category.title" />
+      <h3>{{ category.title }}</h3>
+      <p>{{ category.description }}</p>
+    </div>
+  </div>
+  <div class="button-discription">
+    <p>⬇️ Klicke hier, um alle Filter zu entfernen! �️</p>
+    <button class="load-more" (click)="resetFilters()">Alle anzeigen</button>
+    <p>⬇️ Hier sind unsere Angebote für Sie! �️</p>
+    <div *ngIf="activeCategory" class="active-category">
+      <h3>Aktive Kategorie: {{ getCategoryTitle(activeCategory) }}</h3>
+    </div>
+    <div *ngIf="activeFilters.length > 0" class="active-filters">
+      <h3>Aktive Filter:</h3>
+      <ul>
+        <li *ngFor="let filter of activeFilters">{{ filter }}</li>
+      </ul>
+    </div>
+  </div>
+  <div id="starship-list" class="starship-list">
+    <div *ngFor="let ship of filteredStarships" class="starship-card" (click)="openShipDetails(ship)">
+      <img [src]="ship.imageUrl" [alt]="ship.name" />
+      <h3>{{ ship.name }}</h3>
+      <p>{{ formatPrice(ship.costInCredits) }} Credits</p>
+    </div>
+  </div>
+</main>
+Run HTML
+Footer:
+
+Identifiziere den Footer-Bereich und behalte ihn in der app.component.html-Datei.
+
+Beispiel:
+
+html
+Copy
+<footer class="App-footer">
+  <div class="impressum">
+    <a href="#impressum" class="text-white hover:underline mr-4">Impressum</a>
+  </div>
+  <div class="datenschutz">
+    <a href="#datenschutz" class="text-white hover:underline">Datenschutz</a>
+  </div>
+  <div class="foot" (click)="scrollToTop()">
+    <p>&copy; 2025 WingScout24 Inc. All rights reserved.</p>
+  </div>
+</footer>
+Run HTML
+Modale:
+
+Identifiziere die Modale und behalte sie in der app.component.html-Datei.
+
+Beispiel:
+
+html
+Copy
+<div *ngIf="selectedShip" class="modal-z" (click)="closeModal($event)">
+  <div class="modal-content-ship">
+    <button class="close" (click)="selectedShip = null">✖</button>
+    <h2>{{ selectedShip.name }}</h2>
+    <img [src]="selectedShip.imageUrl" [alt]="selectedShip.name" class="modal-image" />
+    <p>Hersteller: {{ selectedShip.manufacturer }}</p>
+    <p>Klasse: {{ selectedShip.starshipClass }}</p>
+    <p>Kosten: {{ formatPrice(selectedShip.costInCredits) }} Credits</p>
+    <div class="modal-buttons">
+      <button (click)="handleAddToFavorites(selectedShip)">
+        {{ isFavorite(selectedShip.id) ? '★ Favorit entfernen' : '★ Favorisieren' }}
+      </button>
+      <button (click)="isInCart(selectedShip.id) ? removeFromCart(selectedShip.id) : handleAddToCart(selectedShip)">
+        {{ isInCart(selectedShip.id) ? '🛒 Aus dem Warenkorb entfernen' : '🛒 In den Warenkorb' }}
+      </button>
+    </div>
+  </div>
+</div>
+Run HTML
+4. Tipps für die Schüler
+Strukturierung: Teile den Code in kleine, wiederverwendbare Abschnitte auf.
+
+Kommentare: Füge Kommentare hinzu, um den Code besser verständlich zu machen.
+
+Testing: Teste die App nach jeder Änderung, um sicherzustellen, dass alles korrekt funktioniert.
+
+Erweiterungen: Optional können die Schüler die App um weitere Funktionen erweitern, z. B. eine Suchfunktion oder zusätzliche Filter.
+
+5. Beispiel-Lösung
+app.component.html
+html
+Copy
+<div class="App">
+  <!-- Header -->
+  <header class="App-header" (click)="closeMenu($event)">
+    <div class="header-content">
+      <img src="/assets/mylogo.png" alt="wingscout Logo" class="App-logo" (click)="scrollToTop()" />
+      <div class="app-title" (click)="scrollToTop()">Willkommen bei WingScout24.de</div>
+      <div class="menu-container" (click)="toggleMenu()">
+        <div class="menu-icon">Menü ☰</div>
+      </div>
+    </div>
+    <div *ngIf="isMenuOpen" class="menu">
+      <ul>
+        <li (click)="openModal('filter')">Suche</li>
+        <li (click)="openModal('favorites')">Meine Favoriten</li>
+        <li (click)="openModal('cart')">Zum Warenkorb</li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Hauptinhalt -->
+  <main class="App-main">
+    <div class="titel-content">
+      <h3>Ord Matell's größter Gebrauchtraumschiffmarkt!</h3>
+      <h3>Egal ob kleiner wendiger Fighter, oder schlagkräftige Invasionsflotte!</h3>
+      <h3>Bei uns finden Sie alles, was Sie für Ihre Rebellion brauchen!</h3>
+      <h3>⬇️ Stöbern Sie gerne in unseren Kategorien ⬇️</h3>
+    </div>
+    <div class="category-cards">
+      <div *ngFor="let category of shipCategories" class="category-card" (click)="handleCategoryClick(category.id)">
+        <img [src]="category.image" [alt]="category.title" />
+        <h3>{{ category.title }}</h3>
+        <p>{{ category.description }}</p>
+      </div>
+    </div>
+    <div class="button-discription">
+      <p>⬇️ Klicke hier, um alle Filter zu entfernen! ⬇️</p>
+      <button class="load-more" (click)="resetFilters()">Alle anzeigen</button>
+      <p>⬇️ Hier sind unsere Angebote für Sie! ⬇️</p>
+      <div *ngIf="activeCategory" class="active-category">
+        <h3>Aktive Kategorie: {{ getCategoryTitle(activeCategory) }}</h3>
+      </div>
+      <div *ngIf="activeFilters.length > 0" class="active-filters">
+        <h3>Aktive Filter:</h3>
+        <ul>
+          <li *ngFor="let filter of activeFilters">{{ filter }}</li>
+        </ul>
+      </div>
+    </div>
+    <div id="starship-list" class="starship-list">
+      <div *ngFor="let ship of filteredStarships" class="starship-card" (click)="openShipDetails(ship)">
+        <img [src]="ship.imageUrl" [alt]="ship.name" />
+        <h3>{{ ship.name }}</h3>
+        <p>{{ formatPrice(ship.costInCredits) }} Credits</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="App-footer">
+    <div class="impressum">
+      <a href="#impressum" class="text-white hover:underline mr-4">Impressum</a>
+    </div>
+    <div class="datenschutz">
+      <a href="#datenschutz" class="text-white hover:underline">Datenschutz</a>
+    </div>
+    <div class="foot" (click)="scrollToTop()">
+      <p>&copy; 2025 WingScout24 Inc. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Modale -->
+  <div *ngIf="selectedShip" class="modal-z" (click)="closeModal($event)">
+    <div class="modal-content-ship">
+      <button class="close" (click)="selectedShip = null">✖</button>
+      <h2>{{ selectedShip.name }}</h2>
+      <img [src]="selectedShip.imageUrl" [alt]="selectedShip.name" class="modal-image" />
+      <p>Hersteller: {{ selectedShip.manufacturer }}</p>
+      <p>Klasse: {{ selectedShip.starshipClass }}</p>
+      <p>Kosten: {{ formatPrice(selectedShip.costInCredits) }} Credits</p>
+      <div class="modal-buttons">
+        <button (click)="handleAddToFavorites(selectedShip)">
+          {{ isFavorite(selectedShip.id) ? '★ Favorit entfernen' : '★ Favorisieren' }}
+        </button>
+        <button (click)="isInCart(selectedShip.id) ? removeFromCart(selectedShip.id) : handleAddToCart(selectedShip)">
+          {{ isInCart(selectedShip.id) ? '🛒 Aus dem Warenkorb entfernen' : '🛒 In den Warenkorb' }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+Run HTML
+6. Bewertungskriterien
+Strukturierung: Der Code ist logisch in Komponenten aufgeteilt.
+
+Funktionalität: Die App funktioniert wie erwartet.
+
+Code-Qualität: Der Code ist gut kommentiert und lesbar.
+
+Kreativität: Optional können zusätzliche Funktionen implementiert werden.
+
+Viel Erfolg! 🚀

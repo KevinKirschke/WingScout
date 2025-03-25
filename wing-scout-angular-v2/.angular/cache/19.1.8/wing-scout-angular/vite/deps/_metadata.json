@@ -1,0 +1,61 @@
+{
+  "hash": "96cdb952",
+  "configHash": "6e89f4e7",
+  "lockfileHash": "db20287c",
+  "browserHash": "a485507e",
+  "optimized": {
+    "@angular/common": {
+      "src": "../../../../../../node_modules/@angular/common/fesm2022/common.mjs",
+      "file": "@angular_common.js",
+      "fileHash": "02f87551",
+      "needsInterop": false
+    },
+    "@angular/core": {
+      "src": "../../../../../../node_modules/@angular/core/fesm2022/core.mjs",
+      "file": "@angular_core.js",
+      "fileHash": "fa537893",
+      "needsInterop": false
+    },
+    "@angular/forms": {
+      "src": "../../../../../../node_modules/@angular/forms/fesm2022/forms.mjs",
+      "file": "@angular_forms.js",
+      "fileHash": "5711d2ba",
+      "needsInterop": false
+    },
+    "@angular/platform-browser": {
+      "src": "../../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
+      "file": "@angular_platform-browser.js",
+      "fileHash": "592b2304",
+      "needsInterop": false
+    },
+    "jspdf": {
+      "src": "../../../../../../node_modules/jspdf/dist/jspdf.es.min.js",
+      "file": "jspdf.js",
+      "fileHash": "c78ca291",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-DDLNL2HW": {
+      "file": "chunk-DDLNL2HW.js"
+    },
+    "chunk-KHH5AEWN": {
+      "file": "chunk-KHH5AEWN.js"
+    },
+    "html2canvas.esm-ZNF64ISW": {
+      "file": "html2canvas__esm-ZNF64ISW.js"
+    },
+    "purify.es-QZDEE7K7": {
+      "file": "purify__es-QZDEE7K7.js"
+    },
+    "index.es-HJ6NDOY4": {
+      "file": "index__es-HJ6NDOY4.js"
+    },
+    "chunk-WUUVWCMF": {
+      "file": "chunk-WUUVWCMF.js"
+    },
+    "chunk-TXDUYLVM": {
+      "file": "chunk-TXDUYLVM.js"
+    }
+  }
+}

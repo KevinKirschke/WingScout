@@ -1,0 +1,158 @@
+
+
+
+<!-- Modals -->
+
+
+<!-- Raumschiff-Modal -->
+<div *ngIf="selectedShip" class="modal-z" (click)="closeModal($event)">
+    <div class="modal-content-ship">
+      <button class="close" (click)="selectedShip = null">✖</button>
+      <h2>{{ selectedShip.name }}</h2>
+      <img [src]="selectedShip.imageUrl" [alt]="selectedShip.name" class="modal-image" />
+      <p>Hersteller: {{ selectedShip.manufacturer }}</p>
+      <p>Klasse: {{ selectedShip.starshipClass }}</p>
+      <p>Kosten: {{ formatPrice(selectedShip.costInCredits) }} Credits</p>
+      <div class="modal-buttons">
+        <button (click)="handleAddToFavorites(selectedShip)">
+          {{ isFavorite(selectedShip.id) ? '★ Favorit entfernen' : '★ Favorisieren' }}
+        </button>
+        <button (click)="isInCart(selectedShip.id) ? removeFromCart(selectedShip.id) : handleAddToCart(selectedShip)">
+          {{ isInCart(selectedShip.id) ? '🛒 Aus dem Warenkorb entfernen' : '🛒 In den Warenkorb' }}
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  
+  <!-- Stückzahl-Modal -->
+  <div *ngIf="showQuantityModal" class="modal-z" (click)="closeModal($event)">
+    <div class="modal-content">
+      <button class="close" (click)="showQuantityModal = false">✖</button>
+      <h2>Stückzahl auswählen</h2>
+      <div class="quantity-selector">
+        <button (click)="decrementQuantity()">-</button>
+        <input class="in" type="number" [(ngModel)]="quantity" min="1" />
+        <button (click)="incrementQuantity()">+</button>
+      </div>
+      <div class="modal-buttons">
+        <button (click)="showQuantityModal = false">Abbrechen</button>
+        <button (click)="addToCartWithQuantity()">Hinzufügen</button>
+      </div>
+    </div>
+  </div>
+  
+  
+  <!-- Favoritenliste-Modal -->
+  <div *ngIf="showFavorites" class="modal" (click)="closeModal($event)">
+    <div class="modal-content">
+      <button class="close" (click)="showFavorites = false">✖</button>
+      <h2>Favoriten</h2>
+      <div *ngIf="favorites.length === 0; else favoriteList">
+        <p>Keine Favoriten</p>
+      </div>
+      <ng-template #favoriteList>
+        <div *ngFor="let ship of favorites" class="fav-cart-item" (click)="openShipDetailsFromFavorites(ship)">
+          <p>{{ ship.name }}</p>
+          <button (click)="removeFromFavorites(ship.id)">🗑️ Entfernen</button>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+  
+  
+  <!-- Suchen-Modal -->
+  <div *ngIf="showFilterModal" class="modal" (click)="closeModal($event)">
+    <div class="modal-content">
+      <button class="close" (click)="showFilterModal = false">✖</button>
+      <h2>Filter</h2>
+      <form>
+        <label>
+          Name:
+          <input type="text" name="name" [(ngModel)]="filters.name" />
+        </label>
+        <label>
+          Modell:
+          <select name="model" [(ngModel)]="filters.model">
+            <option value="">Alle</option>
+            <option *ngFor="let model of uniqueModels" [value]="model">{{ model }}</option>
+          </select>
+        </label>
+        <label>
+          Hersteller:
+          <select name="manufacturer" [(ngModel)]="filters.manufacturer">
+            <option value="">Alle</option>
+            <option *ngFor="let manufacturer of uniqueManufacturers" [value]="manufacturer">{{ manufacturer }}</option>
+          </select>
+        </label>
+        <label>
+          Min. Preis:
+          <input type="number" name="minPrice" [(ngModel)]="filters.minPrice" />
+        </label>
+        <label>
+          Max. Preis:
+          <input type="number" name="maxPrice" [(ngModel)]="filters.maxPrice" />
+        </label>
+      </form>
+      <div class="modal-buttons">
+        <button (click)="showFilterModal = false">Zurück</button>
+        <button (click)="resetFilters()">Zurücksetzen</button>
+        <button (click)="handleFilterApply()">OK</button>
+      </div>
+    </div>
+  </div>
+  
+  
+  <!-- Warenkorb-Modal -->
+  <div *ngIf="showCart" class="modal" (click)="closeModal($event)">
+    <div class="modal-content">
+      <button class="close" (click)="showCart = false">✖</button>
+      <h2>Warenkorb</h2>
+      <div *ngIf="cart.length === 0; else cartList">
+        <p>Warenkorb ist leer</p>
+      </div>
+      <ng-template #cartList>
+        <div *ngFor="let ship of cart" class="fav-cart-item" (click)="openShipDetailsFromCart(ship)">
+          <p>{{ ship.name }} - {{ ship.quantity }} Stk - {{ formatPrice(ship.costInCredits * ship.quantity) }} Credits</p>
+          <button (click)="removeFromCart(ship.id)">🗑️ Entfernen</button>
+        </div>
+        <div class="cart-total">
+          <div style="margin-top: 25px;"></div>
+          <p>Zu zahlender Gesamtpreis: {{ formatPrice(calculateTotalPrice()) }} Credits</p>
+        </div>
+        <div class="modal-buttons">
+          <button (click)="handleClearCart()">Warenkorb leeren</button>
+          <button (click)="handleCheckout()">Zur Kasse</button>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+  
+  
+  <!-- Kasse-Modal -->
+  <div *ngIf="showCheckoutModal" class="modal" (click)="closeModal($event)">
+    <div class="modal-content">
+      <button class="close" (click)="showCheckoutModal = false">✖</button>
+      <h2>Kasse</h2>
+      <div *ngIf="cart.length === 0; else checkoutList">
+        <p>Warenkorb ist leer</p>
+      </div>
+      <ng-template #checkoutList>
+        <div *ngFor="let ship of cart; let i = index" class="fav-cart-item">
+          <p>{{ ship.name }} - {{ ship.quantity }} Stk - {{ formatPrice(ship.costInCredits * ship.quantity) }} Credits</p>
+          <div class="quantity-selector">
+            <button (click)="updateCartQuantity(i, 'decrement')">-</button>
+            <input class="in" type="number" [(ngModel)]="ship.quantity" min="1" />
+            <button (click)="updateCartQuantity(i, 'increment')">+</button>
+          </div>
+        </div>
+        <div class="cart-total">
+          <p>Zu zahlender Gesamtpreis: {{ formatPrice(calculateTotalPrice()) }} Credits</p>
+        </div>
+        <div class="modal-buttons">
+          <button (click)="handleExportToPDF()">Rechnung als PDF</button>
+          <button (click)="handlePayNow()">Jetzt Bezahlen</button>
+        </div>
+      </ng-template>
+    </div>
+  </div>

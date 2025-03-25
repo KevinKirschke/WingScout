@@ -1,0 +1,181 @@
+<!-- app.component.html -->
+
+<!--
+
+hier rendern wir den ganzen return.
+die ausgabe die der user am ende auf der webseite sieht.
+
+es ist ein klassischer aufbau mit header ,
+dann der main content, und der footer mit den üblichen verdächtigen.
+
+zum schluss kommen die modale und cards der einzelnen komponenten.
+die kommentare machen nochmal deutlich was was ist..
+erklärt sich eigentlich von selbst. einfaches html , liest sich wie nen buch.
+
+-->
+
+
+<div class="App">
+
+
+  <!-- 
+   
+  und hier kommt unser Header / Navbar mit Menü !!!
+  
+  -->
+
+<!-- Header -->
+<header class="App-header" (click)="closeMenu($event)">
+  <div class="header-content">
+    <img src="/assets/mylogo.png" alt="wingscout Logo" class="App-logo" (click)="scrollToTop()" />
+    <div class="app-title" (click)="scrollToTop()">Willkommen bei WingScout24.de</div>
+
+    <!-- Menü-Icon -->
+    <div class="menu-container" (click)="toggleMenu()">
+      <div class="menu-icon">Menü ☰</div>
+    </div>
+  </div>
+
+  <!-- Menü Dropdown -->
+  <div *ngIf="isMenuOpen" class="menu">
+    <ul>
+      <li (click)="openModal('filter')">Suche</li>
+      <li (click)="openModal('favorites')">Meine Favoriten</li>
+      <li (click)="openModal('cart')">Zum Warenkorb</li>
+    </ul>
+  </div>
+</header>
+
+
+  <!-- 
+   
+  und hier kommt unser Hauptkontent !!!
+  
+  -->
+
+
+<!-- Toastmessage/Notify für User Feedback -->
+<div *ngIf="feedback" class="feedback">{{ feedback }}</div>
+
+
+<!-- Hauptinhalt -->
+<main class="App-main">
+  <div class="titel-content">
+    <h3>Ord Matell's größter Gebrauchtraumschiffmarkt!</h3>
+    <br />
+    <h3>Egal ob kleiner wendiger Fighter, oder schlagkräftige Invasionsflotte!</h3>
+    <br />
+    <h3>Bei uns finden Sie alles, was Sie für Ihre Rebellion brauchen!</h3>
+    <br />
+    <h3>⬇️ Stöbern Sie gerne in unseren Kategorien ⬇️</h3>
+  </div>
+
+
+  <!-- Kategorien Cards -->
+  <div class="category-cards">
+    <div
+      *ngFor="let category of shipCategories"
+      class="category-card"
+      (click)="handleCategoryClick(category.id)"
+    >
+      <img [src]="category.image" [alt]="category.title" />
+      <h3>{{ category.title }}</h3>
+      <p>{{ category.description }}</p>
+    </div>
+  </div>
+
+
+  <!-- Button Beschreibung -->
+  <div class="button-discription">
+    <p>⬇️ Klicke hier, um alle Filter zu entfernen! ⬇️</p>
+    <button class="load-more" (click)="resetFilters()">Alle anzeigen</button>
+    <p>⬇️ Hier sind unsere Angebote für Sie! ⬇️</p>
+
+    <div *ngIf="activeCategory" class="active-category">
+      <h3>Aktive Kategorie: {{ getCategoryTitle(activeCategory) }}</h3>
+    </div>
+
+    <div *ngIf="activeFilters.length > 0" class="active-filters">
+      <h3>Aktive Filter:</h3>
+      <ul>
+        <li *ngFor="let filter of activeFilters">{{ filter }}</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <!-- Raumschiff Liste -->
+  <div id="starship-list" class="starship-list">
+    <div
+      *ngFor="let ship of filteredStarships"
+      class="starship-card"
+      (click)="openShipDetails(ship)"
+    >
+      <img [src]="ship.imageUrl" [alt]="ship.name" />
+      <h3>{{ ship.name }}</h3>
+      <p>{{ formatPrice(ship.costInCredits) }} Credits</p>
+    </div>
+  </div>
+
+  <!-- Modale einbinden -->
+  <ng-container *ngIf="modals" [ngTemplateOutlet]="modals"></ng-container>
+
+</main>
+
+
+  <!-- 
+   
+  und hier kommt unser Footer mit Impressum usw..  !!!
+  
+  -->
+
+<!-- Footer -->
+<footer class="App-footer">
+  <div class="impressum">
+    <a href="#impressum" class="text-white hover:underline mr-4">Impressum</a>
+  </div>
+
+  <div class="datenschutz">
+    <a href="#datenschutz" class="text-white hover:underline">Datenschutz</a>
+  </div>
+
+  <div class="foot" (click)="scrollToTop()">
+    <p>&copy; 2025 WingScout24 Inc. All rights reserved.</p>
+  </div>
+</footer>
+
+<!--
+
+hier ist der hauptkontent schon vorbei und jetzt kommen die ganzen modale.
+
+der "return" bis hier , bleibt so wie er ist. hier wird nix ausgelagert.
+
+die anschliessenden modale werden wir nach und in einzelne app.xyz.ts und app.xyz.html files
+zerlegen. aber! css kannst du vergessen bin froh dass das so läuft wie jetzt.. eine file! import rein und feuer.
+liegt als "style.css" unter src neben app auf einer ebene. 
+
+warenkorb, favoritenliste, + und - stückzahl usw, das ganze gedöns mit den modalen,
+zerstückeln wir wie folgt:
+
+ganz einfach - 1. app.modals.ts und app.modals.html
+
+. ja so billig. die funktionen für die modale raus ziehen und vernüftig übergeben
+und den return oben anpassen. da die modale übergeben und gut. nix neuer ordner. die 2 files legen wir
+direkt neben unsere app.component.ts und app.component.html.
+
+mehr passiert auch in der app nicht.. ist fertig.
+
+hier die übeltäter:
+
+-->
+
+<!-- Modale ausgelagert -->
+
+<!-- Das ist unser verstecktes Template -->
+<ng-template #modals>
+  <ng-container *ngInclude="'./app.modals.html'"></ng-container>
+</ng-template>
+
+
+   
+

@@ -1,0 +1,104 @@
+angular.json  node_modules  package.json  package-lock.json  public  README.md  src  tsconfig.app.json  tsconfig.json  tsconfig.spec.json
+                                                                                                                                                  
+┌──(karl㉿kali)-[~/Schreibtisch/Eigene Datein/WingSout24/mein-angular-projekt]
+└─$ cd src                 
+                                                                                                                                                  
+┌──(karl㉿kali)-[~/…/Eigene Datein/WingSout24/mein-angular-projekt/src]
+└─$ ls
+app  assets  index.html  main.ts  styles.css
+                                                                                                                                                  
+┌──(karl㉿kali)-[~/…/Eigene Datein/WingSout24/mein-angular-projekt/src]
+└─$ tree
+.
+├── app
+│   ├── app.component.css
+│   ├── app.component.html
+│   ├── app.component.spec.ts
+│   ├── app.component.ts
+│   ├── app.config.ts
+│   ├── app.module.ts
+│   ├── app.routes.ts
+│   ├── app-routing.module.ts
+│   ├── components
+│   │   ├── cart
+│   │   │   ├── cart.component.css
+│   │   │   ├── cart.component.html
+│   │   │   └── cart.component.ts
+│   │   ├── category-list
+│   │   │   ├── category-list.component.css
+│   │   │   ├── category-list.component.html
+│   │   │   └── category-list.component.ts
+│   │   ├── favorites
+│   │   │   ├── favorites.component.css
+│   │   │   ├── favorites.component.html
+│   │   │   └── favorites.component.ts
+│   │   ├── filter-modal
+│   │   │   ├── filter-modal.component.css
+│   │   │   ├── filter-modal.component.html
+│   │   │   └── filter-modal.component.ts
+│   │   ├── starship-detail
+│   │   │   ├── starship-detail.component.css
+│   │   │   ├── starship-detail.component.html
+│   │   │   └── starship-detail.component.ts
+│   │   └── starship-list
+│   │       ├── starship-list.component.css
+│   │       ├── starship-list.component.html
+│   │       └── starship-list.component.ts
+│   ├── models
+│   │   ├── category.model.ts
+│   │   └── starship.model.ts
+│   └── services
+│       ├── cart.service.ts
+│       ├── favorites.service.ts
+│       └── starship.service.ts
+├── assets
+│   └── images
+│       ├── aa-9.jpeg
+│       ├── arc-170.jpg
+│       ├── assault-ship.jpg
+│       ├── attack-cruiser.jpg
+│       ├── a-wing.jpg
+│       ├── belbullab-22.jpg
+│       ├── b-wing.jpg
+│       ├── calamari-cruiser.jpg
+│       ├── cargos.jpg
+│       ├── clan-frigte.jpg
+│       ├── cr90.jpg
+│       ├── death-star.jpg
+│       ├── droid-controlship.jpg
+│       ├── escort-frigate.jpg
+│       ├── executor.jpg
+│       ├── ferderation-cruiser.jpg
+│       ├── heavy.jpg
+│       ├── h-type.jpg
+│       ├── Imperial-shuttle.jpg
+│       ├── interceptor.jpg
+│       ├── jedi-starfighter.jpg
+│       ├── J-type.jpg
+│       ├── light.jpg
+│       ├── millennium-falcon.jpg
+│       ├── naboo-fighter.jpg
+│       ├── naboo-royal.jpg
+│       ├── rebel-transport.jpg
+│       ├── republic-cruiser.jpg
+│       ├── scimitar.jpg
+│       ├── sentinel.jpg
+│       ├── slave.jpg
+│       ├── solar-sailer.jpg
+│       ├── star-destroyer.jpg
+│       ├── star-skiff.jpg
+│       ├── t-2c.jpg
+│       ├── tie-x1.jpg
+│       ├── v-wing.jpg
+│       ├── x-wing2.jpg
+│       ├── x-wing3.jpg
+│       ├── x-wing.jpg
+│       └── y-wing.jpg
+├── index.html
+├── main.ts
+└── styles.css
+
+13 directories, 75 files
+                                                                                                                                                  
+┌──(karl㉿kali)-[~/…/Eigene Datein/WingSout24/mein-angular-projekt/src]
+└─$ 

@@ -1,0 +1,244 @@
+
+Aufgabe für Schüler: Aufteilung der Angular-App in logische Komponenten
+Ziel der Aufgabe:
+Die Schüler sollen die bestehende Angular-App (app.component.ts) in logische Komponenten aufteilen. Dabei sollen sie die Dateien app.component.ts, app.component.html und app.component.css erstellen und den Code sinnvoll strukturieren. Zusätzlich sollen sie darauf achten, dass die Imports korrekt übertragen werden.
+
+Schritt-für-Schritt-Anleitung:
+1. Vorbereitung
+Erstelle einen neuen Ordner für die Angular-App (falls noch nicht vorhanden).
+
+Erstelle die folgenden Dateien manuell:
+
+ordner components
+- header
+- main
+- footer
+- modale
+
+
+app.xy.ts
+
+app.xy.html
+
+app.x.css
+
+files für die jeweiligen components.
+
+Kopiere den gegebenen Code in die entsprechenden Dateien.
+
+2. Aufteilung des Codes
+Der Code ist in folgende logische Gruppen unterteilt:
+
+Komponenten-Deklaration:
+
+Hier wird die Angular-Komponente mit @Component deklariert.
+
+Die notwendigen Module (z. B. CommonModule, FormsModule) werden importiert.
+
+Zustandsverwaltung:
+
+Zustandsvariablen wie isMenuOpen, modalType, feedback, starships, favorites, cart usw. werden hier verwaltet.
+
+Kategorien und Bilder:
+
+Die Kategorien der Schiffe (shipCategories) und die zugehörigen Bilder (starshipImages) werden definiert.
+
+Initialisierung:
+
+Im Konstruktor werden die Schiffe, Favoriten und der Warenkorb geladen.
+
+Methoden:
+
+Methoden zur Steuerung der Benutzerinteraktionen wie Menüsteuerung, Modalsteuerung, Filterung, Favoritenverwaltung, Warenkorbverwaltung und PDF-Export.
+
+3. Aufgabenstellung
+Teil 1: Strukturierung der Dateien
+app.component.ts:
+
+Behalte die Komponenten-Deklaration (@Component) und die Logik (Zustandsverwaltung, Methoden) in dieser Datei.
+
+Entferne das HTML-Template und die CSS-Datei aus der @Component-Deklaration und verweise stattdessen auf die externen Dateien:
+
+typescript
+Copy
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [CommonModule, FormsModule],
+  templateUrl: './app.component.html', // Verweis auf die externe HTML-Datei
+  styleUrls: ['./app.component.css'], // Verweis auf die externe CSS-Datei
+})
+app.component.html:
+
+Erstelle das HTML-Template für die App.
+
+Verwende die Zustandsvariablen und Methoden aus der app.component.ts-Datei, um die Benutzeroberfläche zu gestalten.
+
+Beispiel:
+
+html
+Copy
+<div>
+  <h1>Willkommen zur Raumschiff-App</h1>
+  <button (click)="toggleMenu()">Menü öffnen/schließen</button>
+  <div *ngIf="isMenuOpen">
+    <!-- Menü-Inhalt -->
+  </div>
+</div>
+Run HTML
+app.component.css:
+
+Füge CSS-Stile für die App hinzu.
+
+Beispiel:
+
+css
+Copy
+h1 {
+  color: blue;
+}
+Teil 2: Logische Aufteilung
+Zustandsverwaltung:
+
+Identifiziere alle Zustandsvariablen (z. B. isMenuOpen, starships, favorites) und behalte sie in der app.component.ts-Datei.
+
+Methoden:
+
+Teile die Methoden in logische Gruppen ein:
+
+Menüsteuerung (toggleMenu, closeMenu)
+
+Modalsteuerung (openModal, closeModal, resetAllModals)
+
+Filterung (applyFilters, resetFilters)
+
+Favoritenverwaltung (handleAddToFavorites, loadFavorites)
+
+Warenkorbverwaltung (handleAddToCart, addToCartWithQuantity, removeFromCart)
+
+API-Aufrufe (loadInitialStarships, getStarships)
+
+Hilfsfunktionen (formatPrice, scrollToTop)
+
+Kategorien und Bilder:
+
+Behalte die Definitionen der Kategorien (shipCategories) und Bilder (starshipImages) in der app.component.ts-Datei.
+
+Teil 3: Imports und Abhängigkeiten
+Stelle sicher, dass alle notwendigen Imports korrekt übertragen werden:
+
+CommonModule und FormsModule aus @angular/common und @angular/forms.
+
+jsPDF aus jspdf.
+
+4. Tipps für die Schüler
+Strukturierung: Teile den Code in kleine, wiederverwendbare Methoden auf.
+
+Kommentare: Füge Kommentare hinzu, um den Code besser verständlich zu machen.
+
+Testing: Teste die App nach jeder Änderung, um sicherzustellen, dass alles korrekt funktioniert.
+
+Erweiterungen: Optional können die Schüler die App um weitere Funktionen erweitern, z. B. eine Suchfunktion oder zusätzliche Filter.
+
+5. Beispiel-Lösung
+app.component.ts
+typescript
+Copy
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { jsPDF } from 'jspdf';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [CommonModule, FormsModule],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  // Zustandsverwaltung
+  isMenuOpen = false;
+  modalType: string | null = null;
+  feedback: string | null = null;
+  starships: any[] = [];
+  filteredStarships: any[] = [];
+  favorites: any[] = [];
+  cart: any[] = [];
+  quantity: number = 1;
+  showQuantityModal: boolean = false;
+  selectedShip: any = null;
+
+  // Kategorien und Bilder
+  shipCategories = [...]; // Kategorien hier einfügen
+  starshipImages = { ... }; // Bilder hier einfügen
+
+  constructor() {
+    this.loadInitialStarships();
+    this.loadFavorites();
+    this.loadCart();
+  }
+
+  // Methoden
+  toggleMenu() { ... }
+  openModal(type: string) { ... }
+  closeModal(event?: Event) { ... }
+  resetAllModals() { ... }
+  handleCategoryClick(categoryId: string) { ... }
+  applyFilters() { ... }
+  resetFilters() { ... }
+  handleAddToFavorites(ship: any) { ... }
+  handleAddToCart(ship: any) { ... }
+  addToCartWithQuantity() { ... }
+  removeFromCart(shipId: string) { ... }
+  calculateTotalPrice() { ... }
+  handleClearCart() { ... }
+  handleCheckout() { ... }
+  handlePayNow() { ... }
+  handleQuantityChange(event: Event) { ... }
+  incrementQuantity() { ... }
+  decrementQuantity() { ... }
+  loadInitialStarships() { ... }
+  getStarships(baseUrl: string, page: number) { ... }
+  formatPrice(price: number): string { ... }
+  scrollToTop() { ... }
+  isFavorite(shipId: string): boolean { ... }
+  isInCart(shipId: string): boolean { ... }
+  handleExportToPDF() { ... }
+}
+app.component.html
+html
+Copy
+<div>
+  <h1>Raumschiff-App</h1>
+  <button (click)="toggleMenu()">Menü</button>
+  <div *ngIf="isMenuOpen">
+    <!-- Menü-Inhalt -->
+  </div>
+  <div *ngIf="showFilterModal">
+    <!-- Filter-Modal -->
+  </div>
+  <div *ngIf="showFavorites">
+    <!-- Favoriten-Modal -->
+  </div>
+  <div *ngIf="showCart">
+    <!-- Warenkorb-Modal -->
+  </div>
+</div>
+Run HTML
+app.component.css
+css
+Copy
+h1 {
+  color: blue;
+}
+6. Bewertungskriterien
+Strukturierung: Der Code ist logisch in Komponenten aufgeteilt.
+
+Funktionalität: Die App funktioniert wie erwartet.
+
+Code-Qualität: Der Code ist gut kommentiert und lesbar.
+
+Kreativität: Optional können zusätzliche Funktionen implementiert werden.
+
+Viel Erfolg! 🚀

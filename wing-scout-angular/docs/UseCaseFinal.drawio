@@ -1,0 +1,78 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0" version="26.0.16">
+  <diagram id="WingScout24_Use_Case" name="Use Case Diagram">
+    <mxGraphModel dx="734" dy="584" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="vp-ekQlgFEn6_PPZrIQq-1" value="" style="rounded=0;whiteSpace=wrap;html=1;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" vertex="1" parent="1">
+          <mxGeometry x="130" y="80" width="670" height="650" as="geometry" />
+        </mxCell>
+        <mxCell id="User" value="User" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;" parent="1" vertex="1">
+          <mxGeometry x="50" y="200" width="50" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="BrowseShips" value="Schiffe ansehen" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="300" y="170" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="FilterShips" value="Filter anwenden" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="300" y="260" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="FavoriteShips" value="Favoriten verwalten" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="300" y="350" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="CartManagement" value="Warenkorb verwalten" style="ellipse;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="300" y="440" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="edge1" style="endArrow=none;startFill=0;" parent="1" source="User" target="BrowseShips" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge3" style="endArrow=none;startFill=0;" parent="1" source="User" target="FilterShips" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge4" style="endArrow=none;startFill=0;" parent="1" source="User" target="FavoriteShips" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge5" style="endArrow=none;startFill=0;" parent="1" source="User" target="CartManagement" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge6" style="endArrow=none;startFill=0;" parent="1" source="User" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="250" y="550" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vp-ekQlgFEn6_PPZrIQq-2" value="Rechnung exportieren" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="590" y="560" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="vp-ekQlgFEn6_PPZrIQq-3" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;dashed=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry x="0.0115" y="-11" width="160" relative="1" as="geometry">
+            <mxPoint x="590" y="580" as="sourcePoint" />
+            <mxPoint x="430" y="580" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vp-ekQlgFEn6_PPZrIQq-4" value="" style="shape=ellipse;container=1;horizontal=1;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;html=1;dashed=0;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="200" y="540" width="230" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="vp-ekQlgFEn6_PPZrIQq-6" value="" style="line;strokeWidth=1;fillColor=none;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;dashed=0;resizeWidth=1;" vertex="1" parent="vp-ekQlgFEn6_PPZrIQq-4">
+          <mxGeometry x="11.500000000000002" y="30" width="207.00000000000003" height="7.500000000000001" as="geometry" />
+        </mxCell>
+        <mxCell id="vp-ekQlgFEn6_PPZrIQq-7" value="extension points" style="text;html=1;align=center;verticalAlign=middle;rotatable=0;fillColor=none;strokeColor=none;whiteSpace=wrap;" vertex="1" parent="vp-ekQlgFEn6_PPZrIQq-4">
+          <mxGeometry x="68.14814814814817" y="33.74736842105263" width="93.7037037037037" height="22.5" as="geometry" />
+        </mxCell>
+        <mxCell id="vp-ekQlgFEn6_PPZrIQq-8" value="Export" style="text;html=1;align=center;verticalAlign=middle;rotatable=0;spacingLeft=25;fillColor=none;strokeColor=none;whiteSpace=wrap;" vertex="1" parent="vp-ekQlgFEn6_PPZrIQq-4">
+          <mxGeometry x="-11.500000000000002" y="56.25" width="230.00000000000003" height="22.5" as="geometry" />
+        </mxCell>
+        <mxCell id="vp-ekQlgFEn6_PPZrIQq-10" value="Checkout durchführen" style="text;html=1;align=center;verticalAlign=middle;rotatable=0;fillColor=none;strokeColor=none;whiteSpace=wrap;" vertex="1" parent="vp-ekQlgFEn6_PPZrIQq-4">
+          <mxGeometry x="68.14814814814817" y="3.75" width="93.7037037037037" height="30.000000000000004" as="geometry" />
+        </mxCell>
+        <mxCell id="vp-ekQlgFEn6_PPZrIQq-13" value="condition:&lt;div&gt;&lt;span style=&quot;text-align: center; text-wrap-mode: wrap;&quot;&gt;extension points:&lt;/span&gt;&lt;/div&gt;&lt;div&gt;Export&lt;/div&gt;" style="resizable=0;html=1;align=left;verticalAlign=bottom;labelBackgroundColor=none;" vertex="1" parent="1">
+          <mxGeometry x="460" y="640" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vp-ekQlgFEn6_PPZrIQq-14" value="" style="endArrow=halfCircle;html=1;rounded=0;align=center;verticalAlign=top;endFill=0;labelBackgroundColor=none;endSize=2;" edge="1" source="vp-ekQlgFEn6_PPZrIQq-13" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="510" y="580" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

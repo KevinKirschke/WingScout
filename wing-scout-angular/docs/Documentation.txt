@@ -1,0 +1,106 @@
+
+
+    Dokumentation - WingScout24
+
+/////////////////////////////////////////////////////////////
+
+Zeitplanung:
+
+Woche	Aufgabe	Geplante Stunden
+
+Woche 1	- Projektplanung und Einrichtung
+UI-Design und Grundgerüst	30 Stunden
+
+Woche 2	- Implementierung der Kernfunktionen:
+Authentifizierung, Zeitstempel, Pausen	30 Stunden
+
+Woche 3	- Fehlerbehebung, Tests,
+Dokumentation	20 Stunden
+
+
+/////////////////////////////////////////////////////////////
+
+
+4. SMART-Zielformulierung
+
+Um die Zielsetzung klarer und messbarer zu gestalten,
+wurde sie entsprechend den SMART-Kriterien angepasst:
+
+Spezifisch: Es wird eine Webanwendung zur Zeiterfassung entwickelt,
+mit Funktionen wie Echtzeit-Feedback zur Arbeitszeit, Pausen
+und eine Wochen- sowie Monatsübersicht.
+
+Messbar: Die Anwendung wird durch eine funktionierende
+Benutzeroberfläche sowie durch die Implementierung der
+Zeiterfassungsfunktionen überprüft.
+
+Erreichbar: Das Projekt wird innerhalb des Zeitrahmens
+von 80 Stunden mit den Technologien React und einer
+browserseitigen SQL-Lösung umgesetzt.
+
+Relevant: Das Projekt hat hohe Relevanz, da es eine
+effiziente, mobile und flexible Lösung zur Zeiterfassung bietet.
+
+Zeitgebunden: Der Zeitrahmen von 3 Wochen ist realistisch
+und berücksichtigt mögliche Verzögerungen.
+
+
+/////////////////////////////////////////////////////////////
+
+
+so. angular projekt steht soweit.
+aber alles noch in einer file. jetzt geht es daran den kram zu zerstückeln.
+
+
+aktuelle strucktur:
+..
+public            
+src        
+├── app
+│   ├── app.component.html
+│   └── app.component.ts
+├── assets
+│   ├── cargos.jpg
+│   ├── heavy.jpg
+│   ├── light.jpg
+│   ├── mylogo.png
+│   └── starships
+│       ├── aa-9.jpeg
+│       ├── ..von..bis..jpg
+│       └── y-wing.jpg
+├── index.html
+├── main.ts
+└── styles.css
+
+neue strucktur : 
+..
+public            
+src        
+├── app
+│   ├── app.component.html      // beinhaltet den Return für Header, Main, Footer
+│   ├── app.component.ts        // Hauptlogik der App
+│   ├── app.modals.html         // hier alle Modale auslagern
+│   └── app.modals.ts           // hier nur das nötigste an Logik für die Modale auslagern
+├── assets
+│   ├── cargos.jpg
+│   ├── heavy.jpg
+│   ├── light.jpg
+│   ├── mylogo.png
+│   └── starships
+│       ├── aa-9.jpeg
+│       ├── ..von..bis..jpg
+│       └── y-wing.jpg
+├── index.html
+├── main.ts                     // übergibt die App im Framework
+└── styles.css                  // alle Styles der App !!!
+
+/////////////////////////////////////////////////////////////
+
+hier kommt die erste file:
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////

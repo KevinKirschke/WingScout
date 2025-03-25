@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net">
+  <diagram id="UseCaseDiagram" name="Page-1">
+    <mxGraphModel dx="1191" dy="861" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- User-Akteur -->
+        <mxCell id="userActor" value="User" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="50" y="150" width="30" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Use Cases -->
+        <mxCell id="uc1" value="Schiffsliste anzeigen" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="100" width="140" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="uc2" value="Schiffdetails ansehen" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="200" width="140" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="uc3" value="Schiff zum Warenkorb hinzufügen" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="300" width="140" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="uc4" value="Warenkorb ansehen/leeren" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="400" width="140" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="uc5" value="Schiff als Favorit speichern" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="500" width="140" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="uc6" value="Favoriten ansehen/löschen" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="600" width="140" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Verbindungen zwischen User und Use Cases -->
+        <mxCell id="edge1" style="edgeStyle=elbowEdgeStyle;rounded=0;orthogonal=1;jettySize=auto;html=1;" edge="1" parent="1" source="userActor" target="uc1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="edge2" style="edgeStyle=elbowEdgeStyle;rounded=0;orthogonal=1;jettySize=auto;html=1;" edge="1" parent="1" source="userActor" target="uc2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="edge3" style="edgeStyle=elbowEdgeStyle;rounded=0;orthogonal=1;jettySize=auto;html=1;" edge="1" parent="1" source="userActor" target="uc3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="edge4" style="edgeStyle=elbowEdgeStyle;rounded=0;orthogonal=1;jettySize=auto;html=1;" edge="1" parent="1" source="userActor" target="uc4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="edge5" style="edgeStyle=elbowEdgeStyle;rounded=0;orthogonal=1;jettySize=auto;html=1;" edge="1" parent="1" source="userActor" target="uc5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="edge6" style="edgeStyle=elbowEdgeStyle;rounded=0;orthogonal=1;jettySize=auto;html=1;" edge="1" parent="1" source="userActor" target="uc6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
